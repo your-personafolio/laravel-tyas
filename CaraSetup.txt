@@ -1,0 +1,26 @@
+# Website Portfolio berbasis CMS
+
+### Prasyarat
+* [Laravel 11](https://laravel.com/)
+* [Composer](https://getcomposer.org)
+* [NPM & Node.js](https://nodejs.org)
+* PHP 8.2 atau lebih tinggi
+* MySQL/MariaDB
+
+### Cara Setup
+1. Jalankan Perintah php -r "file_exists('.env') || copy('.env.example', '.env');"
+2. Jalankan perintah `composer run-script post-root-package-install` 
+3. Jalankan perintah `composer install` untuk menginstalasi dependency
+4. Jalankan perintah `npm install` untuk menginstalasi dependency Javascript
+5. Jalankan Perintah 'php artisan migrate:fresh'
+6. Jalankan Perintah 'php artisan db:seed DatabaseSeeder'
+7. Jalankan Perintah 'php artisan key:generate'
+8. Jalankan Perintah 'php artisan storage:link'
+9. Jalankan Perintah 'php artisan serve'
+10. Jalankan Perintah 'npm run dev'
+
+Akses link "http://127.0.0.1:8000"
+
+# Login Admin
+Email : admin@gmail.com
+Password : admin
