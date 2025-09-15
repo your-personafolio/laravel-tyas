@@ -28,7 +28,7 @@ class ACertificateController extends Controller
             })
             ->rawColumns(['action']) // Kolom 'action' akan dirender di sisi client
             ->make(true);
-    
+
     }
 
 
@@ -44,7 +44,7 @@ class ACertificateController extends Controller
             'issued_by' => 'required|string|max:255',
             'issued_at' => 'required|date',
             'description' => 'nullable|string',
-            'file' => 'required|mimes:pdf', 
+            'file' => 'required|mimes:pdf',
         ]);
 
         $certificate = new Certificate();
@@ -53,20 +53,35 @@ class ACertificateController extends Controller
         $certificate->issued_at = $request->input('issued_at');
         $certificate->description = $request->input('description');
 
+        // if ($request->hasFile('file')) {
+        //     $file = $request->file('file');
+        //     $fileName = $file->getClientOriginalName();
+
+        //     // Cek apakah file dengan nama yang sama sudah ada
+        //     if (Storage::disk('public')->exists('certificates/' . $fileName)) {
+        //         // Jika file dengan nama yang sama sudah ada, tambahkan timestamp ke nama file
+        //         $fileName = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
+        //     }
+
+        //     $filePath = $file->storeAs('certificates', $fileName, 'public');
+        //     $certificate->file = $filePath;
+        // }
+
+
         if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = $file->getClientOriginalName();
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
 
-            // Cek apakah file dengan nama yang sama sudah ada
-            if (Storage::disk('public')->exists('certificates/' . $fileName)) {
-                // Jika file dengan nama yang sama sudah ada, tambahkan timestamp ke nama file
-                $fileName = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
-            }
-
-            $filePath = $file->storeAs('certificates', $fileName, 'public');
-            $certificate->file = $filePath;
+        if (Storage::disk('public')->exists('certificates/' . $fileName)) {
+            $fileName = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
         }
 
+        // Simpan ke storage/app/public/certificates
+        $filePath = $file->storeAs('certificates', $fileName, 'public');
+
+        // Simpan path relatif (agar bisa dipanggil lewat asset())
+        $certificate->file = $filePath;
+    }
         $certificate->save();
 
         return redirect()->route('admin.certificate')->with('success', 'Sertifikat berhasil ditambahkan.');
@@ -91,10 +106,6 @@ class ACertificateController extends Controller
         $certificate = Certificate::findOrFail($id);
 
         if ($request->hasFile('file')) {
-            if ($certificate->file) {
-                Storage::disk('public')->delete($certificate->file);
-            }
-
             $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
 
@@ -102,7 +113,10 @@ class ACertificateController extends Controller
                 $fileName = pathinfo($fileName, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientOriginalExtension();
             }
 
+            // Simpan ke storage/app/public/certificates
             $filePath = $file->storeAs('certificates', $fileName, 'public');
+
+            // Simpan path relatif (agar bisa dipanggil lewat asset())
             $certificate->file = $filePath;
         }
 
