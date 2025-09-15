@@ -18,3 +18,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+
+/build
+.index.php
+.DS_Store
+.htaccess
