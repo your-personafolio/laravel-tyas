@@ -5,7 +5,7 @@ use App\Models\Skill;
 use App\Models\About; // Jika ada model About
 use App\Models\Project;
 use App\Models\Home;
-use App\Models\Certificate;
+use App\Models\certificate;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
