@@ -345,7 +345,7 @@
                             Temui saya, yang berdedikasi untuk memberikan layanan terbaik bagi setiap kebutuhan Anda.
                             Saya percaya bahwa kolaborasi adalah kunci untuk kesuksesan bersama.
                         </p>
-                        <ul class="*:flex *:gap-4 *:items-center *:mt-4">
+                        {{-- <ul class="*:flex *:gap-4 *:items-center *:mt-4">
                             <li>
                                 <i class="fa-solid fa-location-dot"></i>
                                 <div>
@@ -361,7 +361,7 @@
                                 <i class="fa-solid fa-phone"></i>
                                 <p>{{ $whatsapp->name }}</p>
                             </li>
-                        </ul>
+                        </ul> --}}
                         <div
                             class="flex items-center md:justify-end justify-center dark:text-gray-200 text-gray-600 gap-6 mt-9">
                             <p class="text-xs">Ikuti Saya</p>
