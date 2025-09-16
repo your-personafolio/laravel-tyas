@@ -77,7 +77,7 @@ h3 {
 }
 
 .section-header {
-    @apply text-center md:text-left;
+    @apply text-center;
 }
 
 .section-lead {
